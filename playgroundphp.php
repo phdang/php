@@ -4,7 +4,7 @@
 
      <head>
 
-	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <link rel= "stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
 
@@ -48,9 +48,8 @@
 
 		<?php
 
-    for ($i=1; $i<32; $i++){
-
-    ?>
+    for ($i=1; $i<32; $i++) {
+        ?>
       <option value="<?php echo $i ?>">Ngày <?php echo $i ?></option>
 
     <?php
@@ -67,7 +66,7 @@
 
         $i=1;
         while ($i < 13) {
-    ?>
+            ?>
         <option value="<?php echo $i?>">Tháng <?php echo $i?></option>
           <?php
           $i++;
@@ -83,8 +82,8 @@
 
         $i=2017;
         while ($i > 1916) {
-    ?>
-        <option value="<?php echo $i?>">Năm <?php echo $i?></option>
+            ?>
+            <option value="<?php echo $i?>">Năm <?php echo $i?></option>
           <?php
           $i--;
         }
