@@ -9,13 +9,16 @@
 		border-collapse:collapse;
 	}
 	table {
-		width: 90%;
+		max-width: 90%;
+	}
+	th {
+		background-color:Turquoise;
 	}
 	.le {
 		background-color:lavender;
 	}
 	.chan {
-		background-color: hotpink;
+		background-color:lightsalmon;
 	}
 </style>
 </head>
@@ -35,10 +38,10 @@
 	
 	$host = 'localhost';
 	$user = 'shop';
-	$pass = 'OXzWf8GBiAu2cOIo';
+	$pass = 'phd_shop 123';
 	$db = 'shop';
 	
-	//connect
+	//connect to MySQl
 	
 	$link = mysqli_connect($host,$user,$pass,$db) or die("Ket noi that bai");
 	
@@ -47,8 +50,6 @@
 	mysqli_set_charset($link,'utf8');
 	
 	//cau truy van sql
-	
-	//$test = 'CREATE TABLE `test111`';
 	
 	$sql = 'SELECT * FROM `phd4shop_department`';
 	
@@ -69,56 +70,54 @@
 	//while($r = mysqli_fetch_assoc($rs)) {	
 	//	echo $r['name'];
 	//}
-	
 	?>
-    <?php
-		$sql = 'SELECT * FROM `phd4shop_category` LIMIT 0,10';
+   	<?php
+		$sql = 'SELECT * FROM `nn_category` LIMIT 0,10';
 		$rs = mysqli_query($link,$sql);
 	?>
 	<table>
-    	<caption><h2> Danh sach chung loai </h2> </caption>
-    	<tr>
-        	<th>STT</th>
-            <th>Dep ID</th>
-            <th>Ten</th>
-            <th>Thu Tu</th>
-            <th> An/Hien </th>
-        </tr>
+    		<caption><h2>Danh sach chung loai</h2></caption>
+    		<tr>
+        		<th>STT</th>
+        		<th>Dep ID</th>
+            	<th>Ten</th>
+            	<th>Thu Tu</th>
+            	<th> An/Hien </th>
+        	</tr>
     	
-		<?php
+	<?php
 		$i = 1;
-        while($r = mysqli_fetch_assoc($rs)) {	
-		 ?><tr class="<?php echo ($i%2) ? 'le' : 'chan'?>">
-         	<?php
-            echo '<td align="center">',$r['id'], '<br>','</td>';
-			 echo '<td align="center">',$r['department_id'], '<br>','</td>';
-			echo '<td>',$r['name'], '<br>','</td>';
-			echo '<td >',$r['order'], '<br>','</td>';
-			echo '<td>',$r['active'] != 0 ? 'Hien' : 'An', '<br>','</td>';
-			$i++;
-        }?>
-        
-       </tr>
-        	
-            
-        
+      		while($r = mysqli_fetch_assoc($rs)) {
+	?>	
+		 
+		<tr class="<?= ($i%2) ? 'le' : 'chan'?>">
+      	 	<td align="center"><?= $r['id'] ?><br></td>
+			<td align="center"><?= $r['department_id']?><br></td>
+			<td><?= $r['name']?><br></td>
+			<td ><?= $r['order']?><br></td>
+			<td><?= $r['active'] != 0 ? 'Hien' : 'An'?><br></td>
+		</tr>
+	<?php
+	 	$i++;
+        }
+	?>
 	</table>
     
-    <select>
+    	<select>
     	<?php
-			$sql = 'SELECT * FROM `phd4shop_department`';
-			$rs = mysqli_query($link,$sql);
-			while($r=mysqli_fetch_assoc($rs)){
+		$sql = 'SELECT * FROM `nn_department`';
+		$rs = mysqli_query($link,$sql);
+		while($r=mysqli_fetch_assoc($rs)){
 			
 		?>
     
-    	<option value="<?= $r['id']?>"><?= $r['name']?></option>
+    			<option value="<?= $r['id']?>"><?= $r['name']?></option>
         
         <?php
-			}
+		}
         ?>
         
-    </select>
+    	</select>
     
 </body>
 </html>
