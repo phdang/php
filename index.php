@@ -36,17 +36,23 @@
 	//dev mode
 
 	error_reporting(E_ALL); //show errors
-
+	
+	class Config {
+		const host = 'localhost';
+		const user = 'shop';
+		const pass = 'phd_shop 123';
+		const db   = 'shop';
+	}
 	//config
 
-	$host = 'localhost';
-	$user = 'shop';
-	$pass = 'phd_shop 123';
-	$db = 'shop';
+	// define('HOST', 'localhost');
+	// define('USER', 'shop');
+	// define('PASS', 'phd_shop 123');
+	// define('DB'  , 'shop');
 
 	//connect to MySQl
 
-	$link = mysqli_connect($host,$user,$pass,$db) or die("Ket noi that bai");
+	$link = mysqli_connect(Config::host,Config::user,Config::pass,Config::db) or die("Ket noi that bai");
 
 	//UTF8
 
