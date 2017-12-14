@@ -157,16 +157,21 @@ else $page=1;
 						<ul class="pagination">
 							<li id="first"><a href="?cid=<?=$cid ?>&page=1">First</a></li>
 							<?php
-							$sql = 'SELECT COUNT(*) AS `total` FROM `nn_product` WHERE `category_id` = ' . $cid;
+							//Count all active items
+							$sql = 'SELECT COUNT(*) AS `total` FROM `nn_product` WHERE `category_id` = '. $cid . ' AND `active`=1';
 							$rs  = mysqli_query($link,$sql);
 							$r_count_product = mysqli_fetch_assoc($rs);
+							//return all items as variable $total_items
 							$total_items = $r_count_product['total'];
+							//Set page number
 							$page_number = $total_items%$items_per_page ? intval($total_items/$items_per_page) + 1: $total_items/$items_per_page;?>
 							<li id="next"><a href="?cid=<?=$cid ?>&page=<?= $page_number ? max($page - 1,1) : 1;?>">Pre</a></li>
 							<?php
 							$i = 0;
+							//Tao the phan trang cho san pham 
 							while ($i < $page_number) { ?>
 								<?php $page_id = $i+1; ?>
+
 								<li id="page<?= $page_id ?>"><a href="?cid=<?=$cid ?>&page=<?=$page_id?>"><?= $page_id?></a></li>
 							<?php
 							$i++;
