@@ -8,8 +8,14 @@
 
 if(isset($_GET['cid']))$cid=$_GET['cid'];
 else $cid=1;
+if (!is_int($cid)) {
+	$cid = 1;
+}
 if(isset($_GET['page']))$page=$_GET['page'];
 else $page=1;
+if (($page < 1) || !is_int($page)) {
+	$page = 1;
+}
 ?>
 <!doctype html>
 <html>
@@ -164,11 +170,12 @@ else $page=1;
 							//return all items as variable $total_items
 							$total_items = $r_count_product['total'];
 							//Set page number
-							$page_number = $total_items%$items_per_page ? intval($total_items/$items_per_page) + 1: $total_items/$items_per_page;?>
+							$page_number = $total_items%$items_per_page ? intval($total_items/$items_per_page) + 1: $total_items/$items_per_page;
+							?>
 							<li id="next"><a href="?cid=<?=$cid ?>&page=<?= $page_number ? max($page - 1,1) : 1;?>">Pre</a></li>
 							<?php
 							$i = 0;
-							//Tao the phan trang cho san pham 
+							//Tao the phan trang cho san pham
 							while ($i < $page_number) { ?>
 								<?php $page_id = $i+1; ?>
 

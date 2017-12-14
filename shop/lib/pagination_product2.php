@@ -7,11 +7,11 @@ if ($page_number) { ?>
       const pageDisplay = 9
       for (var i = Math.max(appendPoint,pageDisplay+1);i <= <?= $page_number?>;i++) {
         obj = document.getElementById('page' + i);
-        obj.style.display = "none";
+        obj.remove();
       }
       for (var i=1;i<=appendPoint-pageDisplay;i++) {
         obj = document.getElementById('page' + i);
-        obj.style.display = "none";
+        obj.remove();
       }
 </script>
 <?php
