@@ -6,16 +6,24 @@
 //$cid=$_GET['cid'];
 //if($cid=='')$cid=1;
 
-if(isset($_GET['cid']))$cid=$_GET['cid'];
-else $cid=1;
-if (!is_int($cid)) {
+if(isset($_GET['cid'])){
+	$cid=$_GET['cid'];
+
+} else {
+	$cid=1;
+}
+$cid = (int)$cid;
+if (!is_int($cid) || $cid < 1) {
 	$cid = 1;
 }
+echo $cid;
+
 if(isset($_GET['page']))$page=$_GET['page'];
 else $page=1;
 if (($page < 1) || !is_int($page)) {
 	$page = 1;
 }
+
 ?>
 <!doctype html>
 <html>
