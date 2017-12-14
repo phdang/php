@@ -151,9 +151,9 @@ else $page=1;
             <h3> <?=number_format($r['price'])?> VND </h3>
             <input type="button" value="Mua">
         </div>
-       <?php
+    <?php
 			}
-	   ?>
+	  ?>
 						<ul class="pagination">
 							<li id="first"><a href="?cid=<?=$cid ?>&page=1">First</a></li>
 							<?php
@@ -161,7 +161,9 @@ else $page=1;
 							$rs  = mysqli_query($link,$sql);
 							$r_count_product = mysqli_fetch_assoc($rs);
 							$total_items = $r_count_product['total'];
-							$page_number = $total_items%$items_per_page ? intval($total_items/$items_per_page) + 1: $total_items/$items_per_page;
+							$page_number = $total_items%$items_per_page ? intval($total_items/$items_per_page) + 1: $total_items/$items_per_page;?>
+							<li id="next"><a href="?cid=<?=$cid ?>&page=<?= $page_number ? max($page - 1,1) : 1;?>">Pre</a></li>
+							<?php
 							$i = 0;
 							while ($i < $page_number) { ?>
 								<?php $page_id = $i+1; ?>
@@ -172,28 +174,11 @@ else $page=1;
 							?>
 							<?php // Neu page_number khong co gia tri (khong co ket qua) tra ve trang 1 ?>
 
-
+							<li id="next"><a href="?cid=<?=$cid ?>&page=<?=$page_number ? min($page + 1,$page_number) : 1;?>">Next</a></li>
 							<li id="last"><a href="?cid=<?=$cid ?>&page=<?=$page_number ? $page_number : 1;?>">Last</a></li>
 						</ul>
-							<?php
-							if ($page_number) { ?>
-						<script>
-										var obj = document.getElementById('page<?= $page ?>');
-										obj.setAttribute("class","active");
-						</script>
-						<?php
-						} else { ?>
-							<script>
-							var obj = document.getElementById('first');
-							obj.setAttribute("class","disabled");
-							obj = document.getElementById('last');
-							obj.setAttribute("class","disabled");
-							</script>
-					<?php
-					}
-					?>
-
-
+						<!-- Phan trang cho san pham -->
+						<?php include_once('lib/pagination_product2.php');?>
     </div>
     <div id="right">5</div>
     <div id="footer">6</div>
