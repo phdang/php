@@ -19,6 +19,7 @@ if (!is_int($cid) || $cid < 1) {
 
 if(isset($_GET['page']))$page=$_GET['page'];
 else $page=1;
+$page = (int)$page;
 if (($page < 1) || !is_int($page)) {
 	$page = 1;
 }
@@ -80,7 +81,7 @@ if (($page < 1) || !is_int($page)) {
 									while($r=mysqli_fetch_assoc($rsCat))
 									{
 								?>
-                                		<li><a href="?cid=<?=$r['id']?>&page=<?=$page?>"><?=$r['name']?></a></li>
+                                		<li><a href="?cid=<?=$r['id']?>&page=1"><?=$r['name']?></a></li>
                                 <?php
 									}
 								?>
@@ -115,7 +116,7 @@ if (($page < 1) || !is_int($page)) {
 				while($r=mysqli_fetch_assoc($rsCat))
 				{
 			?>
-            	<a href="?cid=<?=$r['id']?>&page=<?=$page ?>"><?=$r['name']?></a>
+            	<a href="?cid=<?=$r['id']?>&page=1"><?=$r['name']?></a>
            <?php
 				}
 		   ?>
