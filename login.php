@@ -29,14 +29,14 @@
 </head>
 
 <body>
-<form action= "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" onSubmit="return checkData()">
+<form action= "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get" onSubmit="return checkData()">
     <table width="300" border="1" align="center" cellpadding="5">
       <caption>
         ĐĂNG NHẬP
       </caption>
       <tr>
         <th scope="row" width="30%">User</th>
-        <td><input type="text" name="user" id="user" placeholder="Nhập email"></td>
+        <td><input type="email" name="user" id="user" placeholder="Nhập email"></td>
       </tr>
       <tr>
         <th scope="row">Pass</th>
@@ -57,12 +57,12 @@ Nếu bạn chưa có tài khoản thì <a href="js2.html">đăng ký</a> </div>
 // define variables and set to empty values
 $name = $email = $gender = $comment = $website = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	if (isset($_POST["pass"]) && $_POST["user"]) {
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+	if (isset($_GET["pass"]) && $_GET["user"]) {
 
-		$pass = test_input($_POST["pass"]);
+		$pass = test_input($_GET["pass"]);
 	  //$name = test_input($_POST["name"]);
-	  $email = test_input($_POST["user"]);
+	  $email = test_input($_GET["user"]);
 
 	}
 
@@ -91,9 +91,9 @@ $link = mysqli_connect($host,$user,$pass_db,$db) or die('No connection');
 mysqli_set_charset($link,'utf8');
 
 //sql
-if (isset($_POST["pass"]) && $_POST["user"]) {
+if (isset($_GET["pass"]) && $_GET["user"]) {
 
-	echo $sql = 'INSERT INTO `nn_user` (`password`, `email`) VALUES (' . '\'' . $pass . '\', \''  . $email . '\')' ;
+	$sql = 'INSERT INTO `nn_user` (`password`, `email`) VALUES (' . '\'' . $pass . '\', \''  . $email . '\')' ;
 	//query
 	 echo mysqli_query($link,$sql) ? 'User\'s data saved' :  'Email đã được sử dụng';
 }

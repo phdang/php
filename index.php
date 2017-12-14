@@ -36,7 +36,7 @@
 	//dev mode
 
 	error_reporting(E_ALL); //show errors
-	
+
 	class Config {
 		const host = 'localhost';
 		const user = 'shop';

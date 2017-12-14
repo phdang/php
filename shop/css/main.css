@@ -1,0 +1,219 @@
+@charset "utf-8";
+/* CSS Document */
+	*
+	{
+		margin:0;
+		padding:0;
+		box-sizing:border-box;
+	}
+	#wrapper
+	{
+		width:1000px;
+		margin:auto;
+	}
+	#header
+	{
+		height:100px;
+		background-color:#39C;
+		text-align:center;
+		line-height:100px;
+	}
+	#menu
+	{
+		height:40px;
+		background-color:#CF0;
+	}
+	#left
+	{
+		width:200px;
+		min-height:300px;
+		background-color:#C90;
+		float:left;
+	}
+	#main
+	{
+		width:590px;
+		min-height:300px;
+		float:left;
+		margin:0 5px;
+		border:2px solid red;
+		padding:5px;
+	}
+	#right
+	{
+		width:200px;
+		height:300px;
+		background-color:#C90;
+		float:right;
+	}
+	#footer
+	{
+		height:80px;
+		background-color:#039;
+		clear:both;
+	}
+	/* Menu CSS */
+	#menu ul
+	{
+		list-style-type:none;
+	}
+	#menu ul li
+	{
+		float: left;
+		z-index: 999;
+		border-right:1px dotted #F00;
+		padding:10px 30px;
+		position:relative;
+	/*	height:40px;*/
+	}
+	#menu ul li:last-child
+	{
+		border:none;
+	}
+	#menu a
+	{
+		text-decoration:none;
+		white-space:nowrap;
+	}
+	#menu a:hover
+	{
+		color:red;
+		font-weight:bold;
+	}
+	/* Cap 2 */
+	#menu ul ul
+	{
+		background-color:#9F6;
+		position:absolute;
+		left:0px;
+		top:100%;
+		display:none;
+	}
+	#menu ul ul li
+	{
+		float:none;
+		border-right:none;
+		border-bottom:1px dotted #F00;
+	}
+	#menu ul li:hover > ul
+	{
+		display:block;
+	}
+	/* cap 3 */
+	#menu ul ul ul
+	{
+		top:0;
+		left:100%;
+		background-color:#F96;
+	}
+
+
+	/* Product */
+	#main .product
+	{
+		width:32.33%;
+		border:1px solid blue;
+		margin:5px 0.5%;
+		text-align:center;
+		float:left;
+		padding:5px;
+	}
+	#main .product h2
+	{
+		font-size:18px;
+		color:blue;
+		height:50px;
+	}
+	#main .product h3
+	{
+		font-size:16px;
+		color:red;
+	}
+	#main .product img
+	{
+		height:100px;
+		max-width:100%;
+	}
+
+	#menu button
+	{
+		width:40px;
+		height:30px;
+		margin:5px 10px;
+		display:none;
+	}
+	#menu button hr
+	{
+		margin:5px 0;
+	}
+
+	#left a {
+			text-decoration: none;
+	}
+
+	.page
+	{
+		line-height:30px;
+	}
+
+	.page a
+	{
+		color:blue;
+		text-decoration:none;
+		border:blue solid 1px;
+		padding:1px 5px;
+	}
+
+	.page a:hover,.page .current
+	{
+		color:red;
+		background-color:yellow;
+	}
+
+
+	/* Responsive */
+
+@media screen and (max-width:1000px)
+{
+	#wrapper
+	{
+		width:100%;
+	}
+	#left,#right
+	{
+		width:20%;
+	}
+	#main
+	{
+		width:58%;
+		margin:0 1%;
+	}
+}
+
+@media screen and (max-width:768px)
+{
+	#main .product
+	{
+		width:31.33%;
+	}
+	#menu ul
+	{
+		display:none;
+	}
+	#menu button
+	{
+		display:inline;
+	}
+}
+
+@media screen and (max-width:480px)
+{
+	#left,#right,#main
+	{
+		width:100%;
+	}
+	#main .product
+	{
+		width:98%;
+	}
+}
