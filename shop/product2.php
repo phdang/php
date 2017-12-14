@@ -16,7 +16,6 @@ $cid = (int)$cid;
 if (!is_int($cid) || $cid < 1) {
 	$cid = 1;
 }
-echo $cid;
 
 if(isset($_GET['page']))$page=$_GET['page'];
 else $page=1;
