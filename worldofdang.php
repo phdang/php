@@ -24,69 +24,7 @@
 
 	<link href="../HTML5/animate.css" rel="stylesheet">
 
-	<script>
-		$(document).ready(function() {
-
-			$("#header").addClass("animated bounce");
-
-			// $("#button-bars").on("click",function(){
-      //
-			// 	$('#button-bars').mouseenter(function(){
-      //
-			// 		$("#myNavbar").css("z-index","199");
-			// 		$("#myNavbar,#button-bars").attr("disabled","disabled");
-      //
-      //
-      //
-			// 	});
-      //
-			// 	$('#button-bars').off("mouseenter");
-      //
-      //
-			// });
-
-        //
-				// $("#myNavbar").css("z-index","199");
-				$("li.dropdown").on("mouseover",function(){
-					const bodyWidth = $('body').width();
-					if  (bodyWidth < 768) {
-
-						$(this).children("ul").css({"display":"inline-block","width":"100%"});
-					} else {
-						$(this).children("ul").css({"display":"inline-block","position":"absolute","top":"0","left":"100%"});
-					}
-				});
-				$("#myNavbar > ul li").on("mouseleave",function(){
-					$("#myNavbar > ul > li").off("click");
-					$("li.dropdown ul").css("display","none");
-				});
-
-				$("#catagory").on("click",function(){
-
-					const bodyWidth = $('body').width();
-					if  (bodyWidth < 768) {
-
-						$("#button-bars").click();
-
-						$("#myNavbar").css("z-index","199");
-
-						$("#myNavbar,#button-bars").attr("disabled","disabled");
-					}
-				});
-				$("#myNavbar").on("mouseleave",function(){
-					const bodyWidth = $('body').width();
-					if  (bodyWidth < 768) {
-							//console.log("leave");
-							$("div#main > div,#main,#header").on("click",function(){
-								$("#myNavbar,#button-bars").removeAttr("disabled","disabled");
-								// console.log("Click");
-								$("#button-bars").click();
-								$("div#main > div,#main").off("click");
-							});
-					}
-				});
-	})
-	</script>
+	<script src="js/myToggledMenu.js"></script>
 
 	<link rel="stylesheet" href="../HTML5/worldofdang-css.css">
 
@@ -121,16 +59,16 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Trang Chủ</a></li>
-					<li>
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Sản Phẩm<span class="caret"></span></a>
-						<ul class="dropdown-menu">
+					<li class="active"><a href="?home">Trang Chủ</a></li>
+					<li class="dropdownsp">
+						<a href="#">Sản Phẩm<span class="caret"></span></a>
+						<ul>
 							<?php
 						$sql = 'SELECT `id`, `name` FROM `nn_department`';
 						$rs = mysqli_query($link,$sql);
 						while($r=mysqli_fetch_assoc($rs)){
 						?>
-								<li class="dropdown">
+								<li>
 									<a href="#"><?= $r['name']?><span class="caret"></span></a>
 									<ul>
 									<?php
@@ -186,7 +124,7 @@
 
 					<img src="shop/images/sanpham/<?=$r['img_url']?>" alt="<?= $r['name']?>">
 
-					<h4><?= $r['price']?></h4>
+					<h4><?= number_format($r['price'])?> VNĐ</h4>
 
 					<button type="button" class="btn btn-primary" name="mua"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Mua</button>
 
