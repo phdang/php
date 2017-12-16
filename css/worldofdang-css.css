@@ -1,0 +1,281 @@
+* {
+
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+}
+
+.clear {
+  padding: 0px 0;
+  clear: left;
+}
+
+.container {
+
+  width: 90%;
+  margin: auto;
+
+}
+
+#header {
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%);
+  height: 100px;
+}
+
+#header h1 {
+  font-size: 60px;
+  font-family: Lobster, monospace;
+  text-align: center;
+  background: -webkit-linear-gradient(#7C7D7C, #121212);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#menu {
+
+  height: 40px;
+  background-color: #ad143d;
+  opacity: 70%
+}
+
+#myNavbar {
+
+  background-color: #ad143d;
+
+}
+
+navbar-right>a {
+  padding-right: 10px;
+}
+
+nav a {
+
+  border-radius: 5px;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+}
+
+a {
+  margin-left: 0%;
+  /*margin-right: 5%;*/
+}
+
+nav {
+  height: 40px;
+  background-color: #ad143d;
+
+}
+
+.navbar {
+  height: 62px;
+  position: sticky;
+  top: 0px;
+  z-index: 99;
+}
+
+.navbar-brand {
+
+  visibility: hidden;
+}
+
+.navbar-toggle {
+
+  float: left;
+}
+
+button.navbar-toggle {
+
+  width: 40px;
+
+}
+
+nav a:hover,
+.active,
+.nav>li>a:focus,
+.nav>li>a {
+
+  background-color: #ad143d;
+  text-decoration: none;
+
+}
+
+nav a:hover,
+.active,
+.nav>li>a:focus,
+.nav>li>a:hover {
+
+  background-color: #ad143d;
+  text-decoration: none;
+  opacity: 1;
+  border-radius: 5px;
+}
+
+#left {
+  background: url("shop.png") no-repeat;
+  width: 30%;
+  min-height: 627px;
+  background-color: #fff;
+  float: left;
+}
+
+
+#main {
+  width: 70%;
+  min-height: 400px;
+  background-color: #fff;
+  padding: 10px 5px;
+  /*margin:5px;*/
+  float: left;
+}
+
+.product,
+.fjords {
+
+  border: 2px solid red;
+  border-radius: 5%;
+  width: 31.33%;
+  text-align: center;
+  padding: 5px 10px 5px 10px;
+  margin: 1%;
+  float: left;
+}
+
+img {
+  width: 80%;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+button {
+
+  font-size: 20px;
+  width: 33.33%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/*	#right{
+width:200px;
+height:300px;
+background-color:red;
+float:left;
+}*/
+
+#footer {
+
+  height: 60px;
+  background-color: #ad143d;
+  color: white;
+  font-size: 18px;
+  padding-top: 0.6%;
+  text-align: center;
+  clear: left;
+}
+
+#footer:hover {
+  opacity: 0.5;
+}
+
+.navbar-nav>li>a {
+
+  padding-bottom: 7px;
+}
+
+#WorldOfDang {
+
+  font-family: Lobster, monospace;
+  background: -webkit-linear-gradient(#7C7D7C, #121212);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media screen and (max-width: 1200px) {
+
+  .navbar {
+
+    height: 62px;
+  }
+
+  #left {
+    width: 20%;
+  }
+
+  ,
+  #main {
+
+    width: 80%;
+
+  }
+
+  .product,
+  .fjords {
+
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .navbar a {
+
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .navbar-brand {
+
+    visibility: visible;
+  }
+
+  #header {
+    height: 60px;
+  }
+
+  #footer {
+    height: 60px;
+  }
+
+  #menu,
+  #header,
+  #footer,
+  #left,
+  #main,
+  .product,
+  .fjords {
+
+    width: 100%;
+
+  }
+
+  #left {
+
+    display: none;
+  }
+
+  #main {
+
+    overflow-x: hidden;
+  }
+
+  /*.product,.fjords {
+
+    border: none;
+
+  }*/
+  #header>h1 {
+
+    font-size: 40px;
+  }
+  #footer div {
+
+    padding-top: 5px;
+
+    font-size: 15px;
+  }
+}

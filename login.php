@@ -29,7 +29,7 @@
 </head>
 
 <body>
-<form action= "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get" onSubmit="return checkData()">
+<form action= "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" onSubmit="return checkData()">
     <table width="300" border="1" align="center" cellpadding="5">
       <caption>
         ĐĂNG NHẬP
@@ -57,12 +57,12 @@ Nếu bạn chưa có tài khoản thì <a href="js2.html">đăng ký</a> </div>
 // define variables and set to empty values
 $name = $email = $gender = $comment = $website = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-	if (isset($_GET["pass"]) && $_GET["user"]) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if (isset($_POST["pass"]) && $_POST["user"]) {
 
-		$pass = test_input($_GET["pass"]);
+		$pass = test_input($_POST["pass"]);
 	  //$name = test_input($_POST["name"]);
-	  $email = test_input($_GET["user"]);
+	  $email = test_input($_POST["user"]);
 
 	}
 
@@ -91,7 +91,7 @@ $link = mysqli_connect($host,$user,$pass_db,$db) or die('No connection');
 mysqli_set_charset($link,'utf8');
 
 //sql
-if (isset($_GET["pass"]) && $_GET["user"]) {
+if (isset($_POST["pass"]) && $_POST["user"]) {
 
 	$sql = 'INSERT INTO `nn_user` (`password`, `email`) VALUES (' . '\'' . $pass . '\', \''  . $email . '\')' ;
 	//query

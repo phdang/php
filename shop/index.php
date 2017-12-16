@@ -1,5 +1,7 @@
 <?php
 	require_once('db/config.php');
+	//$cat_id = isset($_GET['cat_id']) ? $_GET['cat_id'] : 1;
+	@$cat_id = $_GET['cat_id'];
 ?>
 <!doctype html>
 <html>
@@ -7,7 +9,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop</title>
-<link rel="stylesheet" href="css/bootstrap.min.css">
 <link href="css/main.css" rel="stylesheet">
 <link href="css/sdmenu.css" rel="stylesheet">
 <script src="js/sdmenu.js"></script>
@@ -17,6 +18,9 @@
 		myMenu = new SDMenu("my_menu");
 		myMenu.init();
 	};
+	if (window.location.search === '') window.location.assign('?cat_id=1');
+
+
 </script>
 <style>
 	#main{
@@ -101,15 +105,7 @@
 	  <?php
 			require_once('lib/product.php');
 		?>
-            <div class="pagination">
-							<form action= "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
-                  <button id="page" class="active" value="1" type="submit">1</button>
-                  <button value="2" type="submit">2</button>
-                  <button value="3" type="submit">3</button>
-                  <button value="4" type="submit">4<button>
-                  <buttoni value="5" type="submit">5<button>
-							<form>
-            </div>
+
        </div>
        <div id="right">5</div>
     <div id="footer">6</div>
