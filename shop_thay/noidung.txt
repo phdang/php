@@ -1,0 +1,17 @@
+﻿Trang chủ (index.html)
+
+    Menu trên
+    Menu phải,
+    Sản phẩm view nhiều nhất
+    20 sản phẩm mới nhất
+
+Trang sản phẩm (listing.html)
+
+    Hiển thị sản phẩm theo loại
+    Phân trang
+    Sắp xếp theo tên hoặc giá (tăng hoặc giảm dần)
+
+Trang chi tiết (detail.html)
+
+    Hiển thị chi tiết 1 sản phẩm
+    Hiển thị 20 sản phẩm cùng loại mới nhất.
