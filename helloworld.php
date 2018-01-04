@@ -45,6 +45,12 @@
             echo '<h1>Hello World!</h1>';
 
             //phpinfo();
+
+            //Encrypt
+
+            echo hash('sha512', hash('sha512', '123')), '<br>';
+
+            echo '4f22a5b713259a8b3e6d47c9073d7eef25e6ced4c20cbe49abaaa2e80b01e4e37c1a7c16891810668dd9a6bd88f259bbf8b7a672d37e785c3f2f3aa0b7169b54'
         ?>
 
 	</div>
