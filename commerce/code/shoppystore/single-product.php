@@ -1,0 +1,1 @@
+<?php ya_product_detail_check(); ?>

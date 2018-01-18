@@ -1,17 +1,11 @@
 <?php
-// Start Session
-	session_start();
-
-//Header giữa trang
-
-	ob_start();
-
-//DB
-	require_once('lib/config.php');
-	$pid = isset($_GET['pid']) ? $_GET['pid'] : 1;
-	$cid = isset($_GET['cid']) ? $_GET['cid'] : 1;
+session_start();
+ob_start();//cached output cho browser, de su dung ham header
+require_once("lib/db.php");
 ?>
-<!DOCTYPE html><head>
+
+<!DOCTYPE html>
+<head>
 <meta charset="utf-8">
 <title>Estore 16</title>
 <!-- // Stylesheets // -->
@@ -34,23 +28,7 @@
 <script type="text/javascript" src="js/contentslider.js"></script>
 <script type="text/javascript" src="js/jquery.fancybox-1.3.1.js"></script>
 <script type="text/javascript" src="js/lightbox.js"></script>
-
-<style>
-.listing ul li:nth-of-type(4n+0) {
-	margin-right:0;
-}
-
-.col2_center {
-
-
-}
-
-
-
-</style>
-
 </head>
-
 
 <body>
 <a name="top"></a>
@@ -59,39 +37,24 @@
 	<div id="masthead">
     	<div class="secnd_navi">
         	<ul class="links">
-            	<li>
-                	<?php
-
-					if ($userID = @$_SESSION['id']) {
-
-
-
-							$sql = 'SELECT `name` from `nn_user` WHERE `id` = '.$userID;
-
-
-
-							$rs = mysqli_query($link,$sql);
-
-							$r = mysqli_fetch_assoc($rs);
-
-						?>
-
-						Xin Chào <?= $r['name']; ?>
-
-
-
-                </li>
-
-                <li><a href="?mod=account">My Account</a></li>
-
-                 <?php
-
+            	<?php
+                	if(isset($_SESSION['name']))
+					{
+						echo '<li>Xin chào ',$_SESSION['name'],'</li>';
+						echo '<li><a href="?mod=account">My Account</a></li>';
 					}
 				?>
                 <li><a href="#">My Wishlist</a></li>
-                <li><a href="cart.html">My Cart</a></li>
-                <li><a href="#">Checkout</a></li>
-                <li class="last"><a href="?mod=<?= $userID ? 'logout': 'login' ?>"><?= $userID ? 'Log out' : 'Log in' ?></a></li>
+                <li><a href="?mod=cart">My Cart</a></li>
+                <li><a href="?mod=checkout">Checkout</a></li>
+                <li class="last">
+                	<?php
+						if(isset($_SESSION['id']))
+							echo '<a href="?mod=logout">Log out</a>';
+						else
+							echo '<a href="?mod=login">Log In</a>';
+					?>
+                </li>
             </ul>
             <ul class="network">
             	<li>Share with us:</li>
@@ -103,7 +66,7 @@
         </div>
         <div class="clear"></div>
     	<div class="logo">
-        	<a href="index.php"><img src="images/logo.png" alt="" ></a>
+        	<a href="index.html"><img src="images/logo.png" alt="" ></a>
             <h5 class="slogn">The best watches for all</h5>
         </div>
         <ul class="search">
@@ -113,98 +76,60 @@
         <div class="clear"></div>
         <div class="navigation">
             <ul id="nav" class="dropdown dropdown-linear dropdown-columnar">
-                <li><a href="index.php">Trang chủ</a></li>
-                <li><a href="static.html">Giới thiệu</a></li>
-                <li class="dir"><a href="#">Sản phẩm</a>
+                <li><a href="index.php">Trang chu</a></li>
+                <li><a href="static.html">About Us</a></li>
+                <li class="dir"><a href="#">San pham</a>
                     <ul class="bordergr big">
-                    	<?php
-						$sql = 'SELECT * FROM `nn_department` WHERE `active` = 1 ORDER BY `order`';
-						mysqli_set_charset($link,'utf8');
-						$rs = mysqli_query($link,$sql);
+                    <?php
+					$sl1="select * from nn_department where active=1 order by `order`";
+					$kq1=mysqli_query($link,$sl1);
+					while($d1=mysqli_fetch_assoc($kq1)){
+					?>
 
-						while ($r=mysqli_fetch_assoc($rs)) { ?>
-
-                        	<li class="dir"><span class="colr navihead bold"><?= $r['name']?></span>
+                        <li class="dir"><span class="colr navihead bold"><?php echo $d1['name'];?></span>
                             <ul>
                             <?php
-							$sql = 'SELECT * FROM `nn_category` WHERE `active` = 1 AND `department_id`='.$r['id'] . ' ORDER BY `order`';
-							$rsCat = mysqli_query($link,$sql);
-
-							while ($r=mysqli_fetch_assoc($rsCat)) {
-							$cid = $r['id'];
+							$sl2="select * from nn_category where active=1 and department_id={$d1['id']} order by `order`";
+							$kq2=mysqli_query($link,$sl2);
+							while($d2=mysqli_fetch_assoc($kq2))
+							{
 							?>
 
-                                	<li><a href="?mod=product&cid=<?= $cid ?>"><?= $r['name'] ?></a></li>
+                                <li><a href="?mod=product&cid=<?php echo $d2['id'];?>"><?php echo $d2['name'];?></a></li>
+                             <?php }?>
+                            </ul>
+                        </li>
+                     <?php }?>
 
-                            <?php
-							}
-							?>
-                            </ul>
-                        </li>
-
-						<?php
-						}
-						?>
-
-                        <!--<li class="dir"><span class="colr navihead bold">Calvin Klein</span>
-                            <ul>
-                                <li><a href="categories.html">AK Anne Klein</a></li>
-                                <li><a href="categories.html">Alexander Christie</a></li>
-                                <li><a href="categories.html">Arbutus</a></li>
-                                <li><a href="categories.html">Armitron</a></li>
-                                <li><a href="categories.html">Body Glove</a></li>
-                                <li><a href="categories.html">Calvin Klein</a></li>
-                            </ul>
-                        </li>
-                        <li class="dir"><span class="colr navihead bold">Citizen</span>
-                            <ul>
-                                <li><a href="categories.html">AK Anne Klein</a></li>
-                                <li><a href="categories.html">Alexander Christie</a></li>
-                                <li><a href="categories.html">Arbutus</a></li>
-                                <li><a href="categories.html">Armitron</a></li>
-                                <li><a href="categories.html">Body Glove</a></li>
-                                <li><a href="categories.html">Calvin Klein</a></li>
-                            </ul>
-                        </li>
-                        <li class="dir"><span class="colr navihead bold">Calvin Klein</span>
-                            <ul>
-                                <li><a href="categories.html">AK Anne Klein</a></li>
-                                <li><a href="categories.html">Alexander Christie</a></li>
-                                <li><a href="categories.html">Arbutus</a></li>
-                                <li><a href="categories.html">Armitron</a></li>
-                                <li><a href="categories.html">Body Glove</a></li>
-                                <li><a href="categories.html">Calvin Klein</a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </li>
-                <li><a href="?mod=login">BedSheets</a></li>
+                <li><a href="login.html">BedSheets</a></li>
                 <li class="dir"><a href="#">Pages</a>
                     <ul class="bordergr small">
                         <li class="dir"><span class="colr navihead bold">Pages</span>
                             <ul>
-                                <li class="clear"><a href="index.php">Home Page</a></li>
-                                <li class="clear"><a href="?mod=account">Account Page</a></li>
+                                <li class="clear"><a href="index.html">Home Page</a></li>
+                                <li class="clear"><a href="account.html">Account Page</a></li>
                                 <li class="clear"><a href="cart.html">Shopping Cart Page</a></li>
                                 <li class="clear"><a href="categories.html">Categories</a></li>
-                                <li class="clear"><a href="?mod=detail">Product Detail Page</a></li>
-                                <li class="clear"><a href="lsting.php">Listing Page</a></li>
-                                <li class="clear"><a href="?mod=login">Login Page</a></li>
+                                <li class="clear"><a href="detail.html">Product Detail Page</a></li>
+                                <li class="clear"><a href="listing.html">Listing Page</a></li>
+                                <li class="clear"><a href="login.html">Login Page</a></li>
                                 <li class="clear"><a href="static.html">Static Page</a></li>
                                 <li class="clear"><a href="contact.html">Contact Page</a></li>
                             </ul>
-                        </li>-->
+                        </li>
                     </ul>
                 </li>
-                <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="contact.html">Contact</a></li>
                 <li class="dir"><a href="#">Themes</a>
                     <ul class="bordergr small">
                         <li class="dir"><span class="colr navihead bold">Themes</span>
                             <ul>
-                                <li class="clear"><a href="../blue/index.php">Blue</a></li>
-                                <li class="clear"><a href="../green/index.php">Green</a></li>
-                                <li class="clear"><a href="../orange/index.php">Orange</a></li>
-                                <li class="clear"><a href="index.php">Purple</a></li>
+                                <li class="clear"><a href="../blue/index.html">Blue</a></li>
+                                <li class="clear"><a href="../green/index.html">Green</a></li>
+                                <li class="clear"><a href="../orange/index.html">Orange</a></li>
+                                <li class="clear"><a href="index.html">Purple</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -223,10 +148,10 @@
     <!-- Banner Section -->
 	<!--<div id="banner">
     	<div id="slider4" class="nivoSlider">
-			<a href="?mod=detail"><img src="images/banner1.jpg" alt="" ></a>
-			<a href="?mod=detail"><img src="images/banner2.jpg" alt="" ></a>
-            <a href="?mod=detail"><img src="images/banner3.jpg" alt="" ></a>
-            <a href="?mod=detail"><img src="images/banner4.jpg" alt="" ></a>
+			<a href="detail.html"><img src="images/banner1.jpg" alt="" ></a>
+			<a href="detail.html"><img src="images/banner2.jpg" alt="" ></a>
+            <a href="detail.html"><img src="images/banner3.jpg" alt="" ></a>
+            <a href="detail.html"><img src="images/banner4.jpg" alt="" ></a>
 		</div>
         <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
 		<script type="text/javascript" src="js/nivo.js"></script>
@@ -234,27 +159,18 @@
     <div class="clear"></div>
     <!-- Scroolling Products -->
     <div class="content_sec">
-
-
     	<!-- Column2 Section -->
         <div class="col2">
         	<div class="col2_top">&nbsp;</div>
-
             <div class="col2_center">
-
             <?php
-
-				//include ('module/home.php');
-				//include ('module/product.php');
-				//include ('module/?mod=detail');
-
-				$mod = isset($_GET['mod']) ? $_GET['mod'] : 'home';
-
-				include ("module/{$mod}.php");
+				//include('module/home.php');
+				//include('module/product.php');
+				$mod=@$_GET['mod'];
+				if($mod=='')$mod='home';//default
+				include("module/front/{$mod}.php");
 			?>
-
             </div>
-
             <div class="clear"></div>
             <div class="col2_botm">&nbsp;</div>
         </div>
@@ -264,34 +180,70 @@
                 <div class="category">
                 	<div class="col1center">
                     <div class="small_heading">
-                        <h5>Sản phẩm</h5>
+                        <h5>Categories</h5>
                     </div>
                     <div class="glossymenu">
-                    <?php
-                    	$sql = 'SELECT * FROM `nn_department` WHERE `active` = 1 ORDER BY `order`';
-						$rs = mysqli_query($link,$sql);
-
-						while ($r=mysqli_fetch_assoc($rs)) { ?>
-                        <a class="menuitem submenuheader" href="#" ><?= $r['name'] ?></a>
+                        <a class="menuitem submenuheader" href="#" >Sports Coverage</a>
                         <div class="submenu">
                             <ul>
-                             <?php
-							$sql = 'SELECT * FROM `nn_category` WHERE `active` = 1 AND `department_id`='.$r['id'] . ' ORDER BY `order`';
-							$rsCat = mysqli_query($link,$sql);
-
-							while ($r=mysqli_fetch_assoc($rsCat)) {
-							$cid = $r['id'];
-							?>
-                                <li><a href="?mod=product&cid=<?= $cid ?>"><?= $r['name'] ?></a></li>
-                            <?php
-							}
-							?>
-
+                                <li><a href="listing.html">Le Vele Bedding</a></li>
+                                <li><a href="listing.html">LHF Bedding</a></li>
+                                <li><a href="listing.html">Pacific Coast</a></li>
+                                <li><a href="listing.html">SnugFleece Woolens</a></li>
+                                <li><a href="listing.html">Southern Textiles</a></li>
                             </ul>
                         </div>
-                    <?php
-						}
-                    ?>
+                        <a class="menuitem submenuheader" href="#" >Le Vele Bedding</a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="listing.html">Le Vele Bedding</a></li>
+                                <li><a href="listing.html">LHF Bedding</a></li>
+                                <li><a href="listing.html">Pacific Coast</a></li>
+                                <li><a href="listing.html">SnugFleece Woolens</a></li>
+                                <li><a href="listing.html">Southern Textiles</a></li>
+                            </ul>
+                        </div>
+                        <a class="menuitem submenuheader" href="#" >LHF Bedding</a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="listing.html">Le Vele Bedding</a></li>
+                                <li><a href="listing.html">LHF Bedding</a></li>
+                                <li><a href="listing.html">Pacific Coast</a></li>
+                                <li><a href="listing.html">SnugFleece Woolens</a></li>
+                                <li><a href="listing.html">Southern Textiles</a></li>
+                            </ul>
+                        </div>
+                        <a class="menuitem submenuheader" href="#" >Pacific Coast</a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="listing.html">Le Vele Bedding</a></li>
+                                <li><a href="listing.html">LHF Bedding</a></li>
+                                <li><a href="listing.html">Pacific Coast</a></li>
+                                <li><a href="listing.html">SnugFleece Woolens</a></li>
+                                <li><a href="listing.html">Southern Textiles</a></li>
+                            </ul>
+                        </div>
+                        <a class="menuitem submenuheader" href="#" >SnugFleece Woolens</a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="listing.html">Le Vele Bedding</a></li>
+                                <li><a href="listing.html">LHF Bedding</a></li>
+                                <li><a href="listing.html">Pacific Coast</a></li>
+                                <li><a href="listing.html">SnugFleece Woolens</a></li>
+                                <li><a href="listing.html">Southern Textiles</a></li>
+                            </ul>
+                        </div>
+                        <a class="menuitem submenuheader" href="#" >Southern Textiles</a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="listing.html">Le Vele Bedding</a></li>
+                                <li><a href="listing.html">LHF Bedding</a></li>
+                                <li><a href="listing.html">Pacific Coast</a></li>
+                                <li><a href="listing.html">SnugFleece Woolens</a></li>
+                                <li><a href="listing.html">Southern Textiles</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     </div>
                     <div class="clear"></div>
                     <div class="left_botm">&nbsp;</div>
@@ -307,7 +259,7 @@
                     <ul>
                         <li>
                             <p class="bold title">
-                                <a href="?mod=detail">Armani Tweed Blazer</a>
+                                <a href="detail.html">Armani Tweed Blazer</a>
                             </p>
                             <div class="grey">
                                 <p class="left">QTY: <span class="bold">3</span></p>
@@ -316,7 +268,7 @@
                         </li>
                         <li>
                             <p class="bold title">
-                                <a href="?mod=detail">Armani Tweed Blazer</a>
+                                <a href="detail.html">Armani Tweed Blazer</a>
                             </p>
                             <div class="grey">
                                 <p class="left">QTY: <span class="bold">3</span></p>
@@ -325,7 +277,7 @@
                         </li>
                         <li>
                             <p class="bold title">
-                                <a href="?mod=detail">Armani Tweed Blazer</a>
+                                <a href="detail.html">Armani Tweed Blazer</a>
                             </p>
                             <div class="grey">
                                 <p class="left">QTY: <span class="bold">3</span></p>
@@ -345,14 +297,34 @@
             	<div class="small_heading">
             		<h5>Poll</h5>
                 </div>
-                <p>What is your favorite Magento feature?</p>
-                <ul>
-                	<li><input name="layerd" type="radio" value="" > Layered Navigation</li>
-                    <li><input name="price" type="radio" value="" > Price Rules</li>
-                    <li><input name="category" type="radio" value="" > Category Management</li>
-                    <li><input name="compare" type="radio" value="" > Compare Products</li>
-                </ul>
-                <a href="#" class="simplebtn"><span>Vote</span></a>
+                <form action="?mod=poll" method="post">
+                    <p>
+                        <?php
+                            //Lay cau hoi dang active
+                            $sql = 'SELECT `id`, `content` FROM `nn_question` WHERE `active` = 1';
+                            $rs = mysqli_query($link,$sql);
+                            $r = mysqli_fetch_assoc($rs);
+
+                            echo $r['content'];
+                        ?>
+                    </p>
+                    <ul>
+                    <?php
+                        //Lay cac lua chon cua cau hoi
+                        $sql = "SELECT `id`, `content` FROM `nn_answer` WHERE `question_id` ={$r['id']}  ORDER BY `order` ASC";
+                        $rs = mysqli_query($link,$sql);
+                        while($r = mysqli_fetch_assoc($rs))
+                        {
+                    ?>
+                            <li><label><input name="answer" type="radio" value="<?=$r['id']?>" ><?=$r['content']?></label></li>
+                    <?php
+                        }
+                    ?>
+                    </ul>
+                    <button type="submit">
+                    <a href="#" class="simplebtn"><span>Vote</span></a>
+                    </button>
+                </form>
                 </div>
                 <div class="clear"></div>
                     <div class="left_botm">&nbsp;</div>
@@ -360,8 +332,8 @@
             <div class="clear"></div>
         </div>
     </div>
+    <div class="clear"></div>
 </div>
- <div class="clear"></div>
 <!-- Footer Section -->
 	<div id="footer">
     	<div class="foot_inr">
@@ -400,13 +372,12 @@
                 </ul>
             </div>
         </div>
-
         <div class="foot_bot">
         	<div class="emailsignup">
         	<h5>Join Our Mailing List</h5>
             <ul class="inp">
             	<li><input name="newsletter" type="text" class="bar" ></li>
-                <li><a href="?mod=register" class="signup">Signup</a></li>
+                <li><a href="#" class="signup">Signup</a></li>
             </ul>
             <div class="clear"></div>
         </div>
@@ -432,7 +403,6 @@ Office address: NewTrends Ltd, The Byre, Berry Pomeroy, Devon, TQ9 6LH
         	<a href="#top" class="top">Top</a>
         </div>
         </div>
-    </div>
     </div>
 </body>
 </html>

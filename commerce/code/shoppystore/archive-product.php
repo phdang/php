@@ -1,0 +1,1 @@
+<?php ya_product_listing_check(); ?>
