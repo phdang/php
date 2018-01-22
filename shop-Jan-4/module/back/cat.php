@@ -33,7 +33,7 @@
     <td align="center"><?= $r['active'] == 0 ? 'v' : '' ?></td>
     <td align="center">
     <a href="?mod=cat_update&cat_id=<?= $r['id'] ?>">Sửa </a>|
-    <a onclick ="return confirm('Bạn có chắc chắn muốn xóa chủng loại này')" href="?mod=cat_del&cat_id=<?= $r['id'] ?>">Xóa </a>
+    <a onclick ="return confirm('Bạn có chắc chắn muốn xóa loại này ?')" href="?mod=cat_del&cat_id=<?= $r['id'] ?>">Xóa </a>
     </td>
   </tr>
 <?php

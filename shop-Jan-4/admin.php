@@ -41,12 +41,12 @@ require_once("lib/db.php");
                 	if(isset($_SESSION['admin_name']))
 					{
 						echo '<li>Xin chào ',$_SESSION['admin_name'],'</li>';
-						echo '<li><a href="?mod=account">My Account</a></li>';
+						//echo '<li><a href="?mod=account">My Account</a></li>';
 					}
 				?>
-                <li><a href="#">My Wishlist</a></li>
+                <!-- <li><a href="#">My Wishlist</a></li>
                 <li><a href="">My Cart</a></li>
-                <li><a href="">Checkout</a></li>
+                <li><a href="">Checkout</a></li> -->
                 <li class="last">
                 	<?php
 						if(isset($_SESSION['admin_id']))

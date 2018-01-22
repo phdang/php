@@ -509,7 +509,7 @@ ul.search li a.searchbtn:hover{
 	float:left;
 }
 
-.glossymenu a.menuitem{	
+.glossymenu a.menuitem{
 	color: #666;
 	display: block;
 	position: relative; /*To help in the anchoring of the ".statusicon" icon image*/
@@ -535,7 +535,7 @@ ul.search li a.searchbtn:hover{
 }
 
 .glossymenu a.menuitem:hover{
-	
+
 }
 
 .glossymenu div.submenu{ /*DIV that contains each sub menu*/
@@ -547,7 +547,7 @@ ul.search li a.searchbtn:hover{
 	margin: 0;
 	padding: 0px 0px 0px 0px;
 	width:210px;
-	
+
 	margin-bottom:3px;
 }
 
@@ -629,7 +629,7 @@ ul.search li a.searchbtn:hover{
 	margin-bottom:10px;
 }
 .mycart .right{
-		
+
 }
 .mycart .left{
 	padding-top:7px;
@@ -1323,7 +1323,7 @@ ul.search li a.searchbtn:hover{
 	padding-bottom:20px;
 }
 .newcus p{
-	padding:0px 0px 10px 0px;	
+	padding:0px 0px 10px 0px;
 }
 a.viewprods {
 	float:right;
@@ -1996,14 +1996,14 @@ h6.bar{
 	margin:3px 0px 0px 29px;
 }
 .tagssec .tag{
-	float:left;	
+	float:left;
 }
 .tagssec .tgs{
 	float:left;
 	margin:0px 0px 0px 32px;
 }
 .tagssec a{
-	float:left;	
+	float:left;
 	margin:2px 2px 0px 2px;
 }
 /*
@@ -2275,7 +2275,7 @@ a.bordrs {
 =======================================================================
 	List view Rules
 =======================================================================
-*/	
+*/
 	.listing2 ul{
 	list-style:none;
 	float:left;
@@ -2353,7 +2353,7 @@ a.bordrs {
 .listing2 .desc
 {
 	display:block;
-}	
+}
 /*
 =======================================================================
 	Advertise Rules
@@ -2525,7 +2525,7 @@ a.bordrs {
 	color:#e7e7e7;
 }
 .topdiv {
-	height:23px; 
+	height:23px;
 	width:960px;
 }
 a.top {
@@ -2739,4 +2739,17 @@ a.top:hover {
 }
 .success {
 	color:#009;
+}
+
+/* Added */
+
+.pagination a.current, .pagination a:hover
+{
+	color:red!important;
+	font-weight:bold;
+	background-color:yellow;
+}
+
+ul.pagination {
+	list-style-type: none;
 }

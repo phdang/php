@@ -1,15 +1,17 @@
 <?php
+
+if (!isset($_SESSION['admin_name'])) {
+
+	header('location:?mod=login');
+}
+
 if (isset($_GET['cat_id'])) {
 
 		$cat_id = $_GET['cat_id'];
 
-	} else {
+} else {
 
-		header('location:?mod=cat');
-	}
-if (!isset($_SESSION['admin_name'])) {
-
-	header('location:?mod=login');
+	header('location:?mod=cat');
 }
 
 $sql = 'DELETE FROM `nn_product` WHERE `category_id` = ' . $cat_id;
